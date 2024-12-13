@@ -1,3 +1,5 @@
+// Complexity O(n*n)
+
 const threeSum = (nums: number[]): number[][] => {
     nums.sort((a, b) => a - b)
     const results = []
