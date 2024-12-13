@@ -1,3 +1,5 @@
+// Implemented a bst from the get go since I was anticipating that something > O(nlogn) was going to fail some tests
+
 type BSTNode = {
     value: number
     sortValue: number
@@ -10,12 +12,7 @@ type BST = {
     root?: BSTNode
 }
 
-// const printNode = (node: BSTNode) => {
-//     console.log(JSON.stringify(node))
-// }
-
 const insertValue = (bst: BST, value: number, sortValue: number) => {
-
     const insertRec = (node: BSTNode, value: number, sortValue: number): BSTNode => {
         if (!node) {
             return { value, sortValue, size: 1 }
@@ -48,13 +45,10 @@ const valueAt = (bst: BST, idx: number): number | undefined => {
         if (idx === leftSize) {
             return node.value
         }
-
         return valueAtRec(node.right, idx - leftSize - 1)
     }
-
     return valueAtRec(bst.root, idx)
 }
-
 
 const power = (n: number): number => {
     let pow = 0
@@ -70,18 +64,12 @@ const power = (n: number): number => {
     return pow
 }
 
-
-
-
-
 const getKth = (lo: number, hi: number, k: number): number => {
     const bst = {} as BST
     for (let idx = 0; idx < hi - lo + 1; idx++) {
         const n = lo + idx
         const pow = power(n)
-        console.log(n, pow)
         insertValue(bst, n, pow)
     }
-    // console.log(JSON.stringify(bst))
     return valueAt(bst, k - 1)
 };
