@@ -1,3 +1,5 @@
+// complexity = O(n*<alphabet size>) = O(n)
+
 const lengthOfLongestSubstring = (s: string): number => {
     let startIdx = 0
     let longuestSubstringLength = 0
