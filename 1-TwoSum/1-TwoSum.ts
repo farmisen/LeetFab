@@ -1,4 +1,6 @@
-function twoSum(nums: number[], target: number): number[] {
+// Complexity O(n) + O(n) = O(n) [loop + map lookup]
+
+const twoSum = (nums: number[], target: number): number[] => {
 
     const numsMap = new Map<number, number[]>()
     nums.forEach((n, idx) => {
