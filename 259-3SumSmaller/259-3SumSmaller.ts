@@ -1,4 +1,4 @@
-// Complexity: O(n^3)
+// Complexity: O(n^2)
 
 // const threeSumSmaller = (nums: number[], target: number): number => {
 //   nums.sort((a, b) => a - b);
