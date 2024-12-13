@@ -1,3 +1,5 @@
+// Complexity O(n)
+
 class SparseVector {
     data: Map<number, number>;
 
@@ -13,7 +15,7 @@ class SparseVector {
 
     // Return the dotProduct of two sparse vectors
     dotProduct(vec: SparseVector): number {
-        const [smallVec, largeVec] = Object.keys(this.data).length < Object.keys(vec.data).length
+        const [smallVec, largeVec] = this.data.size < vec.data.size
             ? [this.data, vec.data]
             : [vec.data, this.data]
 
