@@ -22,7 +22,6 @@ class SparseVector {
         const allIndices = [...allIndicesSet.values()]
         const res = allIndices.reduce((result, idxAsStr) => {
             const idx = parseInt(idxAsStr, 10)
-            console.log(idx, result)
             return result + this.at(idx) * vec.at(idx)
 
         }, 0)
