@@ -1,33 +1,27 @@
 class SparseVector {
-    data: Record<number, number>;
+    data: Map<number, number>;
 
     constructor(nums: number[]) {
-        this.data = {}
+        this.data = new Map()
 
         nums.forEach((val, idx) => {
             if (val !== 0) {
-                this.data[idx] = val
+                this.data.set(idx, val)
             }
         })
-
-    }
-
-    at(idx: number): number {
-        return this.data[idx] ?? 0
     }
 
     // Return the dotProduct of two sparse vectors
     dotProduct(vec: SparseVector): number {
-        const allIndicesSet = new Set([...Object.keys(this.data), ...Object.keys(vec.data)])
-        const allIndices = [...allIndicesSet.values()]
-        const res = allIndices.reduce((result, idxAsStr) => {
-            const idx = parseInt(idxAsStr, 10)
-            return result + this.at(idx) * vec.at(idx)
+        const [smallVec, largeVec] = Object.keys(this.data).length < Object.keys(vec.data).length
+            ? [this.data, vec.data]
+            : [vec.data, this.data]
 
-        }, 0)
-
+        let res = 0
+        for (const [idx, val] of smallVec) {
+            res += val * (largeVec.get(idx) ?? 0)
+        }
         return res
-
     }
 }
 
