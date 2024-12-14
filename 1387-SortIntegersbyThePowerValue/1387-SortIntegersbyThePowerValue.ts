@@ -54,29 +54,30 @@ const valueAt = (bst: BST, idx: number): number | undefined => {
 }
 
 const cache = new Map<number, number>()
-const power = (n: number) => {
-    const powerRec = (n: number): number => {
-        if (n === 1) {
-            return 0
-        }
-        if (cache.has(n)) {
-            return cache.get(n)
-        }
-
-        const pow = 1 + (n % 2 === 0 ? powerRec(n >> 1) : 1 + powerRec((3 * n + 1) >> 1))
-        cache.set(n, pow)
-        return pow
+const power = (n: number): number => {
+    if (n === 1) {
+        return 0
     }
-    return powerRec(n)
+    if (cache.has(n)) {
+        return cache.get(n)
+    }
+
+    const pow = 1 + (n % 2 === 0 ? power(n >> 1) : 1 + power((3 * n + 1) >> 1))
+    cache.set(n, pow)
+    return pow
 }
 
 
 const getKth = (lo: number, hi: number, k: number): number => {
-    const bst = {} as BST
+    // const bst = {} as BST
+    const results = []
     for (let idx = 0; idx < hi - lo + 1; idx++) {
         const n = lo + idx
         const pow = power(n)
-        insertValue(bst, n, pow)
+        // insertValue(bst, n, pow)
+        results.push([pow, n])
     }
-    return valueAt(bst, k - 1)
+    results.sort((a,b) => a[0] - b[0])
+    return results[k-1][1]
+    // return valueAt(bst, k - 1)
 };
