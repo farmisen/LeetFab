@@ -53,18 +53,20 @@ const valueAt = (bst: BST, idx: number): number | undefined => {
     return valueAtRec(bst.root, idx)
 }
 
-
 const cache = new Map<number, number>()
-cache.set(1,0)
-
-const power = (n: number): number => {
+const power = (n: number) => {
     const powerRec = (n: number): number => {
+        if (n === 1) {
+            return 0
+        }
         if (cache.has(n)) {
             return cache.get(n)
         }
 
         const pow = 1 + (n % 2 === 0 ? powerRec(n / 2) : powerRec(3 * n + 1))
         cache.set(n, pow)
+
+        console.log(n, pow, cache.get(n))
         return pow
     }
     return powerRec(n)
