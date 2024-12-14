@@ -65,8 +65,6 @@ const power = (n: number) => {
 
         const pow = 1 + (n % 2 === 0 ? powerRec(n / 2) : powerRec(3 * n + 1))
         cache.set(n, pow)
-
-        console.log(n, pow, cache.get(n))
         return pow
     }
     return powerRec(n)
