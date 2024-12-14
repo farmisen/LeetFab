@@ -80,9 +80,7 @@ const getKth = (lo: number, hi: number, k: number): number => {
     for (let idx = 0; idx < hi - lo + 1; idx++) {
         const n = lo + idx
         const pow = power(n)
-        console.log(n, pow)
         insertValue(bst, n, pow)
     }
-    // console.log(JSON.stringify(bst))
     return valueAt(bst, k - 1)
 };
