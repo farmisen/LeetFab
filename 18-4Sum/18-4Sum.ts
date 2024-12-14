@@ -29,12 +29,9 @@ const threeSum = (nums: number[], target: number, startIdx: number): number[][] 
 const hash = (quadriplet: number[]): number => {
     const offset = 1e9;
     const primes = [31, 37, 41, 43]; // Prime multipliers for mixing
-
-    const values = [...quadriplet]
-    values.sort()
     let hashValue = 0;
     for (let i = 0; i < 4; i++) {
-        const adjustedNum = values[i] + offset; // Shift to positive range [0, 2 * 10^9]
+        const adjustedNum = quadriplet[i] + offset; // Shift to positive range [0, 2 * 10^9]
         hashValue = hashValue * primes[i] + adjustedNum;
         hashValue = hashValue >>> 0; // Ensure unsigned 32-bit integer
     }
@@ -44,14 +41,22 @@ const hash = (quadriplet: number[]): number => {
 
 const fourSum = (nums: number[], target: number): number[][] => {
     const result = new Map<number, number[]>()
+    // const result = []
     nums.sort((a, b) => a - b)
     for (let idx = 0; idx < nums.length - 3; idx++) {
         const targetComplement = target - nums[idx]
         const triplets = threeSum(nums, targetComplement, idx)
         triplets.forEach((triplet) => {
             const quad = [nums[idx], ...triplet]
+            quad.sort()
             result.set(hash(quad), quad)
+            // result.push(quad)
         })
     }
+
     return [...result.values()]
-};
+    // return result.filter(
+    //     (item, index, self) => index === self.findIndex(obj => obj[0] === item[0] && obj[1] === item[1] && obj[2] === item[2] && obj[3] === item[3])
+    // )
+
+}
