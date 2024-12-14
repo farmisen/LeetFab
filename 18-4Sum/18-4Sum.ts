@@ -2,21 +2,11 @@
 // this was a quick try. reusing my previous 3sum implementation but it's far 
 // from being optimal
 
-const threeSum = (nums: number[], target: number, skipIdx: number): number[][] => {
+const threeSum = (nums: number[], target: number, startIdx: number): number[][] => {
     const results = []
-    for (let i = 0; i < nums.length - 2; i++) {
-        if (i === skipIdx) {
-            continue
-        }
+    for (let i = startIdx + 1; i < nums.length - 2; i++) {
         let startIdx = i + 1
         let endIdx = nums.length - 1
-        if (startIdx === skipIdx) {
-            startIdx++
-        }
-
-        if (endIdx === skipIdx) {
-            endIdx--
-        }
 
         while (endIdx > startIdx) {
             const sum = nums[i] + nums[startIdx] + nums[endIdx]
@@ -28,13 +18,6 @@ const threeSum = (nums: number[], target: number, skipIdx: number): number[][] =
                 endIdx--
             } else {
                 startIdx++
-            }
-            if (startIdx === skipIdx) {
-                startIdx++
-            }
-
-            if (endIdx === skipIdx) {
-                endIdx--
             }
 
         }
