@@ -1,4 +1,7 @@
-// complexity is O(nlogn) for insertion and retrieval + O(n) for range traversal
+// with the BST complexity is O(nlogn) for insertion and retrieval + O(n) for range traversal 
+// with the array complexity is O(nlogn) for sorting, O(1) for retireval and + O(n) for range traversal 
+// implementing a BST was the wrong intuition after all, pushing to an array and
+// sorting at the end  was way faster.
 
 type BSTNode = {
     value: number
