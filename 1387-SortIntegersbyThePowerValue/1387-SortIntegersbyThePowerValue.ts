@@ -56,22 +56,23 @@ const valueAt = (bst: BST, idx: number): number | undefined => {
 }
 
 
+const cache = new Map<number, number>()
+
 const power = (n: number): number => {
-    let pow = 0
-    while (n !== 1) {
-        if (n % 2 === 0) {
-            n = n / 2
-            pow++
-        } else {
-            n = (3 * n + 1) / 2
-            pow += 2
+    const powerRec = (n: number): number => {
+        if (n === 1) {
+            return 0
         }
+        if (cache.has(n)) {
+            return cache.get(n)
+        }
+
+        const pow = 1 + (n % 2 === 0 ? powerRec(n / 2) : powerRec(3 * n + 1))
+        cache.set(n, pow)
+        return pow
     }
-    return pow
+    return powerRec(n)
 }
-
-
-
 
 
 const getKth = (lo: number, hi: number, k: number): number => {
