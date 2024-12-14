@@ -1,3 +1,5 @@
+// complexity is O(nlogn) for insertion and retrieval + O(n) for range traversal
+
 type BSTNode = {
     value: number
     sortValue: number
@@ -9,10 +11,6 @@ type BSTNode = {
 type BST = {
     root?: BSTNode
 }
-
-// const printNode = (node: BSTNode) => {
-//     console.log(JSON.stringify(node))
-// }
 
 const insertValue = (bst: BST, value: number, sortValue: number) => {
 
@@ -57,12 +55,10 @@ const valueAt = (bst: BST, idx: number): number | undefined => {
 
 
 const cache = new Map<number, number>()
+cache.set(1,0)
 
 const power = (n: number): number => {
     const powerRec = (n: number): number => {
-        if (n === 1) {
-            return 0
-        }
         if (cache.has(n)) {
             return cache.get(n)
         }
