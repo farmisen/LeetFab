@@ -1,3 +1,7 @@
+// Complexity should be O(n^3) (O(n^2) from 3sum and O(n) for the outer loop)
+// this was a quick try. reusing my previous 3sum implementation but it's far 
+// from being optimal
+
 const threeSum = (nums: number[], target: number, skipIdx: number): number[][] => {
     const results = []
     for (let i = 0; i < nums.length - 2; i++) {
