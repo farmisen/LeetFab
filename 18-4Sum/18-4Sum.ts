@@ -39,8 +39,23 @@ const hash = (quadriplet: number[]): number => {
     return hashValue;
 }
 
+const hash128 = (quadriplet: number[]): string => {
+    const offset = 1e9; // Shift range to positive
+    const modulus = BigInt("340282366920938463463374607431768211297"); // 2^128 - 159, a 128-bit prime
+    const primes = [BigInt(31), BigInt(37), BigInt(41), BigInt(43)]; // Prime multipliers for mixing
+
+    let hashValue = BigInt(0);
+    for (let i = 0; i < 4; i++) {
+        const adjustedNum = BigInt(quadriplet[i] + offset); // Convert to BigInt
+        hashValue = (hashValue * primes[i] + adjustedNum) % modulus;
+    }
+
+    return hashValue.toString(); // Return the hash as a string (128-bit value)
+};
+
+
 const fourSum = (nums: number[], target: number): number[][] => {
-    const result = new Map<number, number[]>()
+    const result = new Map<string, number[]>()
     // const result = []
     nums.sort((a, b) => a - b)
     for (let idx = 0; idx < nums.length - 3; idx++) {
@@ -49,7 +64,7 @@ const fourSum = (nums: number[], target: number): number[][] => {
         triplets.forEach((triplet) => {
             const quad = [nums[idx], ...triplet]
             quad.sort()
-            result.set(hash(quad), quad)
+            result.set(hash128(quad), quad)
             // result.push(quad)
         })
     }
