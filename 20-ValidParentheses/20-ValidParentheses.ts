@@ -1,7 +1,3 @@
-// lets start a the begining of the str
-
-
-
 const complement = {
   "(": ")",
   ")": "(",
