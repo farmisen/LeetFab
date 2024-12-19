@@ -13,7 +13,7 @@ const longestPalindrome = (s: string): string => {
     return s
   }
 
-  // if palCache[i][j] is true then the substring starting at i and ending at j is a palidrome
+  // if palIndex[i][j] is true then the substring starting at i and ending at j is a palidrome
   const palIndex: boolean[][] = Array.from({ length: strLen }, () => Array.from({ length: strLen }, () => false))
 
   let startIdx = 0
