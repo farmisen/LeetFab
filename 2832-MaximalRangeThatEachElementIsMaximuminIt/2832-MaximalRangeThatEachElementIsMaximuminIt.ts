@@ -69,6 +69,10 @@ const maximumLengthOfRangesV1 = (nums: number[]): number[] => {
 
 // now trying to use a monotonic stack (hinted from dicussions)
 
+const empty = (array: number[]) => array.length === 0
+const peek = (array: number[]) => array[array.length - 1]
+
+
 const maximumLengthOfRanges = (nums: number[]): number[] => {
   const nextGreaterStack: number[] = []
   const prevGreaterStack: number[] = []
@@ -76,24 +80,29 @@ const maximumLengthOfRanges = (nums: number[]): number[] => {
   const prevGreaterIdx: number[] = Array.from({ length: nums.length })
 
   for (let i = 0; i < nums.length; i++) {
-    // console.log("----------", i)
-    // console.log("1", nextGreaterIdx, nextGreaterStack)
-    // console.log("1", prevGreaterIdx, prevGreaterStack)
 
-    while (nextGreaterStack.length !== 0 && nums[i] > nums[nextGreaterStack[nextGreaterStack.length - 1]]) {
+    // maintain a stack of growing values idx 
+    // when the curr idx value is > top of the stack value
+    // this current idx is the next greatest for the idx on the top of the stack
+    while (!empty(nextGreaterStack) && nums[i] > nums[peek(nextGreaterStack)]) {
       nextGreaterIdx[nextGreaterStack.pop()] = i
     }
     nextGreaterStack.push(i)
 
-    while (prevGreaterStack.length !== 0 && nums[i] > nums[prevGreaterStack[prevGreaterStack.length - 1]]) {
+    // maintain a stack of decreasing values
+    // when the curr idx value is > top of the stack value
+    // pop all the idx until the stack is empty or the top
+    // of the stack value is > to the current value
+    while (!empty(prevGreaterStack) && nums[i] > nums[peek(prevGreaterStack)]) {
       prevGreaterStack.pop()
     }
-    if (prevGreaterStack.length !== 0 && nums[prevGreaterStack[prevGreaterStack.length - 1]] > nums[i]) {
-      prevGreaterIdx[i] = prevGreaterStack[prevGreaterStack.length - 1]
+
+    // if the current value is < top of the stack value then the
+    // top of the stack value is the prev number for the current value
+    if (!empty(prevGreaterStack) && nums[i] < nums[peek(prevGreaterStack)]) {
+      prevGreaterIdx[i] = peek(prevGreaterStack)
     }
     prevGreaterStack.push(i)
-    // console.log("2", nextGreaterIdx, nextGreaterStack)
-    // console.log("2", prevGreaterIdx, prevGreaterStack)
   }
 
   const results = []
@@ -102,9 +111,6 @@ const maximumLengthOfRanges = (nums: number[]): number[] => {
     const rightIdx = nextGreaterIdx[i] !== undefined ? nextGreaterIdx[i] - 1 : nums.length - 1
     results.push(rightIdx - leftIdx + 1)
   }
-  // console.log(results)
-  // console.log(prevGreaterIdx)
-  // console.log(nextGreaterIdx)
 
   return results
 }
