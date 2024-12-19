@@ -1,60 +1,23 @@
-/**
- * Definition for singly-linked list.
- * class ListNode {
- *     val: number
- *     next: ListNode | null
- *     constructor(val?: number, next?: ListNode | null) {
- *         this.val = (val===undefined ? 0 : val)
- *         this.next = (next===undefined ? null : next)
- *     }
- * }
- */
+// type combo = {
+//   nested: Pair | undefined 
+// }
 
-
-const insertNode = (node: ListNode, list: ListNode) : ListNode => {
-  // console.log("i0", node.val, "=>", list)
-  if (node.val <= list.val) {
-    node.next = list
-    // console.log("i1: <=", node)
-    return node
+const transformCombination = (combo: string): string[] => {
+  const result = []
+  for (let i = 0; i < combo.length; i++) {
+    result.push([combo.slice(0, i + 1), "()", combo.slice(i + 1)].join(""))
   }
-  if (list.next) {
-    // console.log("i2: ==", list)
-    list.next = insertNode(node, list.next)
-    // console.log("i3: ==", list)
-  } else {
-    // console.log("i4: ==", list)
-    list.next = node
-    node.next = null
-    // console.log("i5: ==", list)
-  }
-  // console.log("i6: <=", list)
-  return list
+  return result
 }
 
-const mergeTwoLists = (list1: ListNode | null, list2: ListNode | null): ListNode | null => {
-  if (!list1 && list2) {
-    return list2
-  }
+const transformCombinations = (combos: Set<string>): Set<string> => {
+  return new Set([...combos.values()].flatMap((combo) => transformCombination(combo) ))
+}
 
-  if (list1 && !list2) {
-    return list1
+const generateParenthesis = (n: number): string[] => {
+  let current = new Set(["()"])
+  for (let i = 0; i < n - 1; i++) {
+    current = transformCombinations(current)
   }
-
-  if (!list2 && !list1) {
-    return null
-  }
-  
-  let output = list1
-  let input = list2
-  
-  while (input) {
-    // console.log("1", input, output)
-    const inputNext = input.next
-    output = insertNode(input, output)
-    input = inputNext
-    // console.log("2", input, output)
-    // console.log("----")
-  }
-  return output
+  return [...current.values()]
 };
