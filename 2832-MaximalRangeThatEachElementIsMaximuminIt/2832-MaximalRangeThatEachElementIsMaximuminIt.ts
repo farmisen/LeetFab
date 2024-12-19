@@ -74,12 +74,13 @@ const peek = (array: number[]) => array[array.length - 1]
 
 
 const maximumLengthOfRanges = (nums: number[]): number[] => {
+  const numsLen = nums.length
   const nextGreaterStack: number[] = []
   const prevGreaterStack: number[] = []
-  const nextGreaterIdx: number[] = Array.from({ length: nums.length })
-  const prevGreaterIdx: number[] = Array.from({ length: nums.length })
+  const nextGreaterIdx: number[] = Array.from({ length: numsLen })
+  const prevGreaterIdx: number[] = Array.from({ length: numsLen })
 
-  for (let i = 0; i < nums.length; i++) {
+  for (let i = 0; i < numsLen; i++) {
 
     // maintain a stack of growing values idx 
     // when the curr idx value is > top of the stack value
@@ -105,11 +106,11 @@ const maximumLengthOfRanges = (nums: number[]): number[] => {
     prevGreaterStack.push(i)
   }
 
-  const results = []
-  for (let i = 0; i < nums.length; i++) {
+  const results = Array.from<number>({ length: numsLen })
+  for (let i = 0; i < numsLen; i++) {
     const leftIdx = prevGreaterIdx[i] !== undefined ? prevGreaterIdx[i] + 1 : 0
-    const rightIdx = nextGreaterIdx[i] !== undefined ? nextGreaterIdx[i] - 1 : nums.length - 1
-    results.push(rightIdx - leftIdx + 1)
+    const rightIdx = nextGreaterIdx[i] !== undefined ? nextGreaterIdx[i] - 1 : numsLen - 1
+    results[i] = rightIdx - leftIdx + 1
   }
 
   return results
