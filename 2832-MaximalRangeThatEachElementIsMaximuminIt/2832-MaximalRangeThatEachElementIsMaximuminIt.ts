@@ -85,8 +85,9 @@ const maximumLengthOfRanges = (nums: number[]): number[] => {
     // maintain a stack of growing values idx 
     // when the curr idx value is > top of the stack value
     // this current idx is the next greatest for the idx on the top of the stack
-    while (!empty(nextGreaterStack) && nums[i] > nums[peek(nextGreaterStack)]) {
-      nextGreaterIdx[nextGreaterStack.pop()] = i
+    while (nextGreaterStack.length > 0 && nums[i] > nums[nextGreaterStack[nextGreaterStack.length - 1]]) {
+      const topIdx = nextGreaterStack.pop()!
+      nextGreaterIdx[topIdx] = i
     }
     nextGreaterStack.push(i)
 
@@ -94,14 +95,14 @@ const maximumLengthOfRanges = (nums: number[]): number[] => {
     // when the curr idx value is > top of the stack value
     // pop all the idx until the stack is empty or the top
     // of the stack value is > to the current value
-    while (!empty(prevGreaterStack) && nums[i] > nums[peek(prevGreaterStack)]) {
+    while (prevGreaterStack.length > 0 && nums[i] > nums[prevGreaterStack[prevGreaterStack.length - 1]]) {
       prevGreaterStack.pop()
     }
 
     // if the current value is < top of the stack value then the
     // top of the stack value is the prev number for the current value
-    if (!empty(prevGreaterStack) && nums[i] < nums[peek(prevGreaterStack)]) {
-      prevGreaterIdx[i] = peek(prevGreaterStack)
+    if (prevGreaterStack.length > 0 && nums[i] < nums[prevGreaterStack[prevGreaterStack.length - 1]]) {
+      prevGreaterIdx[i] = prevGreaterStack[prevGreaterStack.length - 1]
     }
     prevGreaterStack.push(i)
   }
