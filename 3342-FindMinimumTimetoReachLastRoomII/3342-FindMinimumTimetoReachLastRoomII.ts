@@ -1,7 +1,3 @@
-//
-// Too Slow
-//
-
 
 // const moves = (moveTime: number[][], visited: number[][], x: number, y: number, elapsed: number): number[][] => {
 //   const length = moveTime[0].length
@@ -52,11 +48,6 @@
 //   // console.log(`[${elapsed}] best time: ${smallestTime}`)
 //   return smallestTime
 // }
-
-
-//
-// Still Too Slow
-//
 
 
 // const pqPush = <T>(queue: T[], el: T) => {
