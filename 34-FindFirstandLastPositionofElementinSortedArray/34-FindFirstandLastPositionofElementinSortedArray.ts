@@ -4,9 +4,9 @@ const searchRangeRec = (nums: number[], target: number, idx:number, len:number):
     return [-1, -1]
   }
  
-  if (len === 1 && nums[idx] === target) {
-    return [idx, idx]
-  }
+  // if (len === 1 && nums[idx] === target) {
+  //   return [idx, idx]
+  // }
 
 
   const p0 = nums[idx] === target ? idx : -1
