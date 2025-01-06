@@ -8,8 +8,6 @@ const countVowelSubstrings = (word: string): number => {
     const sub = word.slice(left, right + 1)
     const onlyVowels = sub.split("").every(isVowel)
     const allVowels = ['a', 'e', 'i', 'o', 'u'].every(c => sub.indexOf(c) !== -1)
-
-    console.log(sub, onlyVowels, allVowels)
     if (onlyVowels && allVowels) {
       result++
       console.log(word[right+1])
