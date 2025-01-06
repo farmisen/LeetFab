@@ -19,7 +19,6 @@ const longestBeautifulSubstring = (word: string): number => {
         result = Math.max(result, Math.max(seenVowels.size, current))
       }
     } else {
-      console.log(i, s, word.slice(s, i))
       current = 1
       seenVowels.clear()
       seenVowels.add(word[i])
