@@ -4,12 +4,8 @@ const countGoodSubstrings = (s: string): number => {
     return 0
   }
 
-
-  let result = 0
-
   const chars = new Set<string>()
-
-
+  let result = 0
   for (let i = 0; i < s.length - 3 + 1; i++) {
     let j = i
     chars.clear()
@@ -29,6 +25,5 @@ const countGoodSubstrings = (s: string): number => {
     }
 
   }
-
   return result
 }
