@@ -9,7 +9,6 @@ const longestBeautifulSubstring = (word: string): number => {
   let current = 1
   let seenVowels = new Set()
   let i = 1
-  let s = 0
   seenVowels.add(word[0])
   while (i < word.length) {
     if (word[i] >= word[i - 1]) {
@@ -22,7 +21,6 @@ const longestBeautifulSubstring = (word: string): number => {
       current = 1
       seenVowels.clear()
       seenVowels.add(word[i])
-      s = i
     }
     i++
   }
