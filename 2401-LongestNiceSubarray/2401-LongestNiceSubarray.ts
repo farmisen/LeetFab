@@ -12,11 +12,9 @@ const longestNiceSubarray = (nums: number[]): number => {
   let i = 1
   let bitsAccu = nums[0]
   while (i < nums.length) {
-    // console.log("0", i, `${bitsAccu} & ${nums[i]} = ${nums[i] & bitsAccu}`)
     if ((nums[i] & bitsAccu) === 0) {
       current++
       bitsAccu |= nums[i]
-      // console.log(`1 bitsAccu:${bitsAccu}`)
       result = Math.max(current, result)
             i++
       continue
@@ -32,7 +30,6 @@ const longestNiceSubarray = (nums: number[]): number => {
       j--
     }
     i++
-    // console.log(`2 bitsAccu:${bitsAccu}`)
   }
 
   return result
