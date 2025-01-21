@@ -4,7 +4,7 @@ const reverse = (x: number): number => {
   let sign = x > 0 ? 1 : -1
   x *= sign
   while (x > 0) {
-    const d = x - Math.floor(x/10) * 10
+    const d = x % 10
     const val = sign === -1 ? d : 1 +d 
     if (res >= exp - Math.floor(val/10)) {
       return 0
